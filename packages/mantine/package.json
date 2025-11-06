@@ -41,28 +41,30 @@
   "homepage": "https://github.com/tone-labs/curator#readme",
   "peerDependencies": {
     "@mantine/core": "^8.0.0",
+    "@mantine/dates": "^8.0.0",
     "@mantine/hooks": "^8.0.0",
+    "@mantine/modals": "^8.0.0",
     "@refinedev/core": "^5.0.0",
-    "@refinedev/ui-types": "^2.0.0",
+    "dayjs": "^1.11.0",
     "react": "^19.0.0",
     "react-hook-form": "^7.54.1"
   },
+  "dependencies": {
+    "react-markdown": "^10.1.0"
+  },
   "devDependencies": {
     "@mantine/core": "^8.3.6",
+    "@mantine/dates": "^8.3.6",
     "@mantine/hooks": "^8.0.0",
+    "@mantine/modals": "^8.3.6",
     "@refinedev/core": "^5.0.5",
     "@refinedev/ui-types": "^2.0.1",
     "@tabler/icons-react": "^3.31.0",
     "@types/react": "^19.0.6",
+    "dayjs": "^1.11.18",
     "react": "^19.2.0",
     "react-hook-form": "^7.54.1",
     "tsup": "^8.5.0",
     "typescript": "~5.9.3"
-  },
-  "dependencies": {
-    "@mantine/dates": "^8.3.6",
-    "@mantine/modals": "^8.3.6",
-    "dayjs": "^1.11.18",
-    "react-markdown": "^10.1.0"
   }
 }

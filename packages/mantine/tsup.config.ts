@@ -14,12 +14,17 @@ export default defineConfig(({ watch }) => ({
   splitting: false,
   sourcemap: false,
   platform: 'browser',
+  noExternal: ['react-markdown'],
   external: [
     'react',
     'react/jsx-runtime',
     'react-hook-form',
     '@mantine/core',
+    '@mantine/dates',
+    '@mantine/hooks',
+    '@mantine/modals',
     '@refinedev/core',
     '@refinedev/ui-types',
+    'dayjs',
   ],
 }));

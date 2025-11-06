@@ -5,7 +5,7 @@ React admin UI components for [Mantine v8](https://mantine.dev) and [Refine.js](
 ## Installation
 
 ```bash
-pnpm add @curatordev/mantine @mantine/core @mantine/hooks @refinedev/core @refinedev/ui-types react react-hook-form
+pnpm add @curatordev/mantine @mantine/core @mantine/dates @mantine/hooks @mantine/modals @refinedev/core dayjs react-hook-form
 ```
 
 ## Features
