@@ -1,6 +1,6 @@
 {
   "name": "@curatordev/mantine",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React admin UI components for Mantine v8 + Refine.js",
   "type": "module",
   "main": "dist/index.js",
@@ -50,6 +50,7 @@
     "react-hook-form": "^7.54.1"
   },
   "dependencies": {
+    "@refinedev/ui-types": "^2.0.1",
     "react-markdown": "^10.1.0"
   },
   "devDependencies": {
@@ -58,7 +59,6 @@
     "@mantine/hooks": "^8.0.0",
     "@mantine/modals": "^8.3.6",
     "@refinedev/core": "^5.0.5",
-    "@refinedev/ui-types": "^2.0.1",
     "@tabler/icons-react": "^3.31.0",
     "@types/react": "^19.0.6",
     "dayjs": "^1.11.18",
