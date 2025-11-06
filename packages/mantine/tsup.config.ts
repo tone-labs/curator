@@ -14,7 +14,7 @@ export default defineConfig(({ watch }) => ({
   splitting: false,
   sourcemap: false,
   platform: 'browser',
-  noExternal: ['react-markdown'],
+  noExternal: ['react-markdown', '@refinedev/ui-types'],
   external: [
     'react',
     'react/jsx-runtime',
@@ -24,7 +24,6 @@ export default defineConfig(({ watch }) => ({
     '@mantine/hooks',
     '@mantine/modals',
     '@refinedev/core',
-    '@refinedev/ui-types',
     'dayjs',
   ],
 }));
