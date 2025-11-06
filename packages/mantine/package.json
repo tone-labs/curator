@@ -1,0 +1,68 @@
+{
+  "name": "@curatordev/mantine",
+  "version": "0.1.0",
+  "description": "React admin UI components for Mantine v8 + Refine.js",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "react",
+    "admin",
+    "mantine",
+    "refine",
+    "ui",
+    "components",
+    "crud",
+    "data-grid"
+  ],
+  "author": "Tone Labs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tone-labs/curator.git",
+    "directory": "packages/mantine"
+  },
+  "homepage": "https://github.com/tone-labs/curator#readme",
+  "peerDependencies": {
+    "@mantine/core": "^8.0.0",
+    "@mantine/hooks": "^8.0.0",
+    "@refinedev/core": "^5.0.0",
+    "@refinedev/ui-types": "^2.0.0",
+    "react": "^19.0.0",
+    "react-hook-form": "^7.54.1"
+  },
+  "devDependencies": {
+    "@mantine/core": "^8.3.6",
+    "@mantine/hooks": "^8.0.0",
+    "@refinedev/core": "^5.0.5",
+    "@refinedev/ui-types": "^2.0.1",
+    "@tabler/icons-react": "^3.31.0",
+    "@types/react": "^19.0.6",
+    "react": "^19.2.0",
+    "react-hook-form": "^7.54.1",
+    "tsup": "^8.5.0",
+    "typescript": "~5.9.3"
+  },
+  "dependencies": {
+    "@mantine/dates": "^8.3.6",
+    "@mantine/modals": "^8.3.6",
+    "dayjs": "^1.11.18",
+    "react-markdown": "^10.1.0"
+  }
+}
