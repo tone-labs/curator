@@ -65,6 +65,7 @@
     "@storybook/react-vite": "^10.0.6",
     "@tabler/icons-react": "^3.31.0",
     "@types/react": "^19.0.6",
+    "@vueless/storybook-dark-mode": "^10.0.2",
     "dayjs": "^1.11.18",
     "react": "^19.2.0",
     "react-hook-form": "^7.54.1",
