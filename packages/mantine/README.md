@@ -22,22 +22,19 @@ pnpm add @curatordev/mantine @mantine/core @mantine/dates @mantine/hooks @mantin
 ## Quick Start
 
 ```tsx
-import { Create, EditForm, TextFieldInput } from '@curatordev/mantine';
-import { useForm } from '@refinedev/react-hook-form';
+import { Edit, EditForm, TextFieldInput, BooleanFieldInput } from '@curatordev/mantine';
 
-function UserEdit() {
-  const form = useForm({
-    refineCoreProps: {
-      resource: 'users',
-    },
-  });
-
+function UserEdit({ id }: { id: string }) {
   return (
-    <EditForm form={form}>
-      <TextFieldInput name="email" label="Email" required />
-      <TextFieldInput name="firstName" label="First Name" />
-      <TextFieldInput name="lastName" label="Last Name" />
-    </EditForm>
+    <Edit resource="users" id={id}>
+      {(user, { resource, id }) => (
+        <EditForm data={user} resource={resource} id={id}>
+          <TextFieldInput source="first_name" label="First Name" />
+          <TextFieldInput source="last_name" label="Last Name" />
+          <BooleanFieldInput source="is_active" label="Active" />
+        </EditForm>
+      )}
+    </Edit>
   );
 }
 ```
