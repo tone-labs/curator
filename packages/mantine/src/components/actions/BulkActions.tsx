@@ -1,33 +1,10 @@
 import { useState } from 'react';
 
 import { Button, Group, Select, Text } from '@mantine/core';
-import type { BaseKey, CrudFilters, DataProvider } from '@refinedev/core';
+import type { BaseKey, CrudFilters } from '@refinedev/core';
 import { useDataProvider } from '@refinedev/core';
 
-/**
- * Fetch all record IDs across all pages using Refine's data provider
- * Respects current filters to only fetch IDs matching the filtered view
- */
-async function fetchAllIds(dataProvider: DataProvider, resource: string, filters?: CrudFilters): Promise<BaseKey[]> {
-  const allIds: BaseKey[] = [];
-  let currentPage = 1;
-  let hasMore = true;
-  const batchSize = 100;
-
-  while (hasMore) {
-    const response = await dataProvider.getList({
-      resource,
-      pagination: { currentPage, pageSize: batchSize, mode: 'server' },
-      filters: filters || [],
-    });
-
-    allIds.push(...response.data.map((item) => item.id).filter((id): id is BaseKey => id !== undefined));
-    hasMore = response.data.length === batchSize;
-    currentPage++;
-  }
-
-  return allIds;
-}
+import { fetchAllIds } from '../../utils/export.js';
 
 export interface BulkAction {
   label: string;

@@ -2,40 +2,15 @@ import { useState } from 'react';
 
 import { Stack, Text } from '@mantine/core';
 import type { BaseKey } from '@refinedev/core';
-import { type DataProvider, type GetListParams, Refine } from '@refinedev/core';
+import { Refine } from '@refinedev/core';
 import type { Meta } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { type BulkAction, BulkActions } from '../../components/actions/BulkActions';
 import { useRecordSelection } from '../../hooks/useRecordSelection';
+import { createMockDataProvider, createMockRecords } from '../__mocks__/dataProvider';
 
-// Helper to create mock records
-const createMockRecords = (length: number) =>
-  Array.from({ length }, (_, i) => ({
-    id: `${i + 1}`,
-    name: `User ${i + 1}`,
-  }));
-
-// Mock data provider
-const mockDataProvider = {
-  getList: async ({ pagination }: GetListParams) => {
-    const { currentPage = 1, pageSize = 10 } = pagination || {};
-    const start = (currentPage - 1) * pageSize;
-    const end = start + pageSize;
-
-    const allData = createMockRecords(100);
-
-    return {
-      data: allData.slice(start, end),
-      total: allData.length,
-    };
-  },
-  getOne: async () => ({ data: {} }),
-  create: async () => ({ data: {} }),
-  update: async () => ({ data: {} }),
-  deleteOne: async () => ({ data: {} }),
-  getApiUrl: () => 'https://api.example.com',
-};
+const mockDataProvider = createMockDataProvider(100);
 
 const meta = {
   title: 'Actions/BulkActions',
@@ -43,11 +18,7 @@ const meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <Refine
-        dataProvider={mockDataProvider as unknown as DataProvider}
-        resources={[{ name: 'users' }]}
-        options={{ disableTelemetry: true }}
-      >
+      <Refine dataProvider={mockDataProvider} resources={[{ name: 'users' }]} options={{ disableTelemetry: true }}>
         <Story />
       </Refine>
     ),
