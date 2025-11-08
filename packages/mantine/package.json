@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "@refinedev/ui-types": "^2.0.1",
+    "export-to-csv": "^1.4.0",
     "react-markdown": "^10.1.0"
   },
   "devDependencies": {
@@ -68,6 +69,8 @@
     "@types/react": "^19.0.6",
     "@vueless/storybook-dark-mode": "^10.0.2",
     "dayjs": "^1.11.18",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
     "react": "^19.2.0",
     "react-hook-form": "^7.54.1",
     "storybook": "^10.0.6",
