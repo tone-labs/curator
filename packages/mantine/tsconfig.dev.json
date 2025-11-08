@@ -1,7 +1,4 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "types": ["@storybook/react"]
-  },
-  "include": ["src", ".storybook/**/*.tsx", "tsup.config.ts"]
+  "extends": "./tsconfig.settings.json",
+  "include": ["src", ".storybook/**/*.tsx", "**/*.mdx"]
 }
