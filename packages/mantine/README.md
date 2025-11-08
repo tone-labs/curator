@@ -15,7 +15,7 @@ pnpm add @curatordev/mantine @mantine/core @mantine/dates @mantine/hooks @mantin
 - **Inputs**: Form inputs (Text, Number, Boolean, Date, DateTime, Select, MultiSelect, Autocomplete, File, Image, ManyToMany editor)
 - **Buttons**: Action buttons (Create, Edit, Delete, Show, List, Save, Refresh)
 - **Filters**: Query filters (Text, Numeric, Boolean, Select, List, DateRange)
-- **Bulk Actions**: Perform operations on multiple selected records with "select all" support
+- **Actions**: Perform operations on multiple selected records with "select all" support
 - **Forms**: Pre-built form layouts (EditForm)
 - **Overlays**: Modal dialogs (Create, Edit overlays)
 - **Context**: Data management (ManyToMany relationships)
@@ -121,7 +121,7 @@ Data management:
 
 ## Backend Integration
 
-Curator components are designed to work seamlessly with REST APIs that implement structured pagination, sorting, and filtering. For Go backends, check out [dewey](https://github.com/tone-labs/dewey), which provides utilities for building these capabilities into your API endpoints.
+Curator components are designed to work with REST APIs that implement structured pagination, sorting, and filtering. For Go backends, check out [dewey](https://github.com/tone-labs/dewey), which provides utilities for building these capabilities into your API endpoints.
 
 ## License
 
