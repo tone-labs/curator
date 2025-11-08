@@ -1,8 +1,33 @@
 import { useState } from 'react';
 
 import { Button, Group, Select, Text } from '@mantine/core';
-import type { BaseKey, CrudFilters } from '@refinedev/core';
+import type { BaseKey, CrudFilters, DataProvider } from '@refinedev/core';
 import { useDataProvider } from '@refinedev/core';
+
+/**
+ * Fetch all record IDs across all pages using Refine's data provider
+ * Respects current filters to only fetch IDs matching the filtered view
+ */
+async function fetchAllIds(dataProvider: DataProvider, resource: string, filters?: CrudFilters): Promise<BaseKey[]> {
+  const allIds: BaseKey[] = [];
+  let currentPage = 1;
+  let hasMore = true;
+  const batchSize = 100;
+
+  while (hasMore) {
+    const response = await dataProvider.getList({
+      resource,
+      pagination: { currentPage, pageSize: batchSize, mode: 'server' },
+      filters: filters || [],
+    });
+
+    allIds.push(...response.data.map((item) => item.id).filter((id): id is BaseKey => id !== undefined));
+    hasMore = response.data.length === batchSize;
+    currentPage++;
+  }
+
+  return allIds;
+}
 
 export interface BulkAction {
   label: string;
@@ -83,35 +108,6 @@ export function BulkActions({
   const showSelectAll = pageFullySelected && !allSelected && totalItems > pageSize && onSelectAll;
   const showClearSelection = allSelected && onClearSelection;
 
-  /**
-   * Fetch all record IDs across all pages using Refine's data provider
-   * Respects current filters to only fetch IDs matching the filtered view
-   */
-  const fetchAllIds = async (): Promise<BaseKey[]> => {
-    const allIds: BaseKey[] = [];
-    let currentPage = 1;
-    let hasMore = true;
-    const batchSize = 100;
-
-    while (hasMore) {
-      const response = await dataProvider().getList({
-        resource,
-        pagination: {
-          current: currentPage,
-          pageSize: batchSize,
-          mode: 'server',
-        } as any,
-        filters: filters || [],
-      });
-
-      allIds.push(...response.data.map((item) => item.id).filter((id): id is BaseKey => id !== undefined));
-      hasMore = response.data.length === batchSize;
-      currentPage++;
-    }
-
-    return allIds;
-  };
-
   const handleExecuteAction = async () => {
     if (!selectedAction || selectedIds.length === 0) {
       return;
@@ -119,7 +115,7 @@ export function BulkActions({
 
     const action = actions.find((a) => a.value === selectedAction);
     if (action) {
-      const targetIds = allSelected ? await fetchAllIds() : selectedIds;
+      const targetIds = allSelected ? await fetchAllIds(dataProvider(), resource, filters) : selectedIds;
       await action.onExecute(targetIds);
       setSelectedAction(null);
     }

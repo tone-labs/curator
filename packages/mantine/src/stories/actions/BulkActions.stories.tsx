@@ -4,6 +4,7 @@ import { Stack, Text } from '@mantine/core';
 import type { BaseKey } from '@refinedev/core';
 import { type DataProvider, type GetListParams, Refine } from '@refinedev/core';
 import type { Meta } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import { type BulkAction, BulkActions } from '../../components/actions/BulkActions';
 import { useRecordSelection } from '../../hooks/useRecordSelection';
@@ -37,7 +38,7 @@ const mockDataProvider = {
 };
 
 const meta = {
-  title: 'Bulk/BulkActions',
+  title: 'Actions/BulkActions',
   component: BulkActions,
   tags: ['autodocs'],
   decorators: [
@@ -57,8 +58,9 @@ export default meta;
 
 // Interactive example with state
 function BulkActionsExample() {
-  const [actionLog, setActionLog] = useState<string[]>([]);
-  const mockRecords = createMockRecords(5);
+  const pageSize = 10;
+  const totalItems = 100;
+  const mockRecords = createMockRecords(pageSize);
 
   const { selectedIds, selectedRecords, onSelectedRecordsChange, clearSelection, allSelected, selectAll } =
     useRecordSelection(mockRecords);
@@ -68,7 +70,7 @@ function BulkActionsExample() {
       label: 'Activate selected',
       value: 'activate',
       onExecute: async (ids) => {
-        setActionLog((prev) => [...prev, `Activated ${ids.length} items: ${ids.join(', ')}`]);
+        action('activate')(ids);
         clearSelection();
       },
     },
@@ -76,7 +78,7 @@ function BulkActionsExample() {
       label: 'Deactivate selected',
       value: 'deactivate',
       onExecute: async (ids) => {
-        setActionLog((prev) => [...prev, `Deactivated ${ids.length} items: ${ids.join(', ')}`]);
+        action('deactivate')(ids);
         clearSelection();
       },
     },
@@ -84,7 +86,7 @@ function BulkActionsExample() {
       label: 'Delete selected',
       value: 'delete',
       onExecute: async (ids) => {
-        setActionLog((prev) => [...prev, `Deleted ${ids.length} items: ${ids.join(', ')}`]);
+        action('delete')(ids);
         clearSelection();
       },
     },
@@ -103,25 +105,61 @@ function BulkActionsExample() {
     }
   };
 
+  // Handle select all on page
+  const handleSelectPage = (checked: boolean) => {
+    if (checked) {
+      onSelectedRecordsChange(mockRecords);
+    } else {
+      onSelectedRecordsChange([]);
+    }
+  };
+
+  const allPageSelected = selectedIds.length === pageSize;
+
   return (
     <Stack gap="md">
+      <Text size="sm" c="dimmed">
+        Showing {pageSize} of {totalItems} total items
+      </Text>
+
       <BulkActions
         resource="users"
         selectedIds={selectedIds}
         actions={bulkActions}
-        pageSize={mockRecords.length}
-        totalItems={100}
+        pageSize={pageSize}
+        totalItems={totalItems}
         allSelected={allSelected}
         onSelectAll={selectAll}
         onClearSelection={clearSelection}
       />
 
       <Stack gap="xs">
-        <Text size="sm" fw={500}>
-          Simulate selection (click to toggle):
+        <label style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <input
+            type="checkbox"
+            checked={allPageSelected}
+            onChange={(e) => handleSelectPage(e.target.checked)}
+            style={{ fontWeight: 500 }}
+          />
+          <Text size="sm" fw={500}>
+            Select all on page
+          </Text>
+        </label>
+
+        <Text size="sm" fw={500} mt="xs">
+          Items on this page:
         </Text>
         {mockRecords.map((record) => (
-          <label key={record.id} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <label
+            key={record.id}
+            style={{
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              marginLeft: 16,
+            }}
+          >
             <input
               type="checkbox"
               checked={selectedIds.includes(record.id)}
@@ -131,19 +169,6 @@ function BulkActionsExample() {
           </label>
         ))}
       </Stack>
-
-      {actionLog.length > 0 && (
-        <Stack gap="xs">
-          <Text size="sm" fw={500}>
-            Action Log:
-          </Text>
-          {actionLog.map((log) => (
-            <Text key={log} size="xs" c="dimmed">
-              {log}
-            </Text>
-          ))}
-        </Stack>
-      )}
     </Stack>
   );
 }
@@ -169,14 +194,14 @@ export const WithSelection = {
         label: 'Activate',
         value: 'activate',
         onExecute: async (ids: BaseKey[]) => {
-          console.log('Activate:', ids);
+          action('activate')(ids);
         },
       },
       {
         label: 'Delete',
         value: 'delete',
         onExecute: async (ids: BaseKey[]) => {
-          console.log('Delete:', ids);
+          action('delete')(ids);
         },
       },
     ];
@@ -212,7 +237,7 @@ export const AllSelected = {
         label: 'Activate',
         value: 'activate',
         onExecute: async (ids: BaseKey[]) => {
-          console.log('Activate:', ids);
+          action('activate')(ids);
         },
       },
     ];
@@ -245,16 +270,12 @@ export const NoSelection = {
       {
         label: 'Activate',
         value: 'activate',
-        onExecute: async (ids: BaseKey[]) => {
-          console.log('Activate:', ids);
-        },
+        onExecute: action('activate'),
       },
       {
         label: 'Delete',
         value: 'delete',
-        onExecute: async (ids: BaseKey[]) => {
-          console.log('Delete:', ids);
-        },
+        onExecute: action('delete'),
       },
     ],
     pageSize: 25,
