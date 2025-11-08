@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { TextField } from '../../components/fields/TextField';
 
 const meta = {
@@ -30,7 +31,8 @@ export const Basic: Story = {
 export const LongText: Story = {
   args: {
     label: 'Description',
-    value: 'This is a very long text value that demonstrates how the TextField component handles longer content. It should display the entire text without truncation.',
+    value:
+      'This is a very long text value that demonstrates how the TextField component handles longer content. It should display the entire text without truncation.',
   },
 };
 

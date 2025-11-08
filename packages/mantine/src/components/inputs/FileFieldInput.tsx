@@ -84,7 +84,7 @@ export function FileFieldInput({
                 if (type.includes('*')) {
                   // Handle wildcard MIME types like "image/*"
                   const baseType = type.split('/')[0];
-                  return value.type.startsWith(baseType + '/');
+                  return value.type.startsWith(`${baseType}/`);
                 }
                 return type === value.type;
               });

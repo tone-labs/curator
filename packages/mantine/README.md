@@ -10,12 +10,13 @@ pnpm add @curatordev/mantine @mantine/core @mantine/dates @mantine/hooks @mantin
 
 ## Features
 
-- **Buttons**: Action buttons (Create, Edit, Delete, Show, List, Save, Refresh)
+- **Layout**: Page layouts (Create, Edit, List, Show views with breadcrumbs and actions)
 - **Fields**: Display components (Text, Number, Boolean, Date, Email, URL, Image, File, Markdown, Reference, Tag, Array, Computed)
 - **Inputs**: Form inputs (Text, Number, Boolean, Date, DateTime, Select, MultiSelect, Autocomplete, File, Image, ManyToMany editor)
+- **Buttons**: Action buttons (Create, Edit, Delete, Show, List, Save, Refresh)
 - **Filters**: Query filters (Text, Numeric, Boolean, Select, List, DateRange)
+- **Bulk Actions**: Perform operations on multiple selected records with "select all" support
 - **Forms**: Pre-built form layouts (EditForm)
-- **Layout**: Page layouts (Create, Edit, List, Show views with breadcrumbs and actions)
 - **Overlays**: Modal dialogs (Create, Edit overlays)
 - **Context**: Data management (ManyToMany relationships)
 
@@ -39,21 +40,15 @@ function UserEdit({ id }: { id: string }) {
 }
 ```
 
-## Backend Integration
-
-Curator components are designed to work seamlessly with REST APIs that implement structured pagination, sorting, and filtering. For Go backends, check out [dewey](https://github.com/tone-labs/dewey), which provides utilities for building these capabilities into your API endpoints.
 
 ## Component Categories
 
-### Buttons
-Action buttons that integrate with Refine.js resource actions:
-- `CreateButton` - Navigate to create page
-- `EditButton` - Navigate to edit page
-- `ShowButton` - Navigate to show/detail page
-- `DeleteButton` - Delete a record with confirmation
-- `ListButton` - Navigate back to list page
-- `SaveButton` - Submit form
-- `RefreshButton` - Refresh current data
+### Layout
+Page layout components:
+- `Create` - Create page with breadcrumbs and back button
+- `Edit` - Edit page with breadcrumbs and action buttons
+- `List` - List page with breadcrumbs and create button
+- `Show` - Show/detail page with breadcrumbs and action buttons
 
 ### Fields
 Read-only display components for showing data:
@@ -86,6 +81,16 @@ Form input components that work with react-hook-form:
 - `ImageFieldInput` - Image upload with preview
 - `ManyToManyTableEditor` - Edit many-to-many relationships in a table
 
+### Buttons
+Action buttons that integrate with Refine.js resource actions:
+- `CreateButton` - Navigate to create page
+- `EditButton` - Navigate to edit page
+- `ShowButton` - Navigate to show/detail page
+- `DeleteButton` - Delete a record with confirmation
+- `ListButton` - Navigate back to list page
+- `SaveButton` - Submit form
+- `RefreshButton` - Refresh current data
+
 ### Filters
 Query filter components for list pages:
 - `TextFilter` - Text search filter
@@ -95,16 +100,14 @@ Query filter components for list pages:
 - `ListFilter` - Filter by IDs
 - `DateRangeFilter` - Date range filter with presets
 
+### Actions
+Perform operations on multiple selected records:
+- `BulkActions` - UI component for bulk operations with dropdown and "select all" functionality
+- `useTableSelection` - Hook to manage table row selection state
+
 ### Forms
 Pre-built form layouts:
 - `EditForm` - Standard edit/create form layout with save button
-
-### Layout
-Page layout components:
-- `Create` - Create page with breadcrumbs and back button
-- `Edit` - Edit page with breadcrumbs and action buttons
-- `List` - List page with breadcrumbs and create button
-- `Show` - Show/detail page with breadcrumbs and action buttons
 
 ### Overlays
 Modal dialog components:
@@ -116,9 +119,9 @@ Data management:
 - `ManyToManyProvider` - Provider for many-to-many relationship data
 - `useManyToMany` - Hook to access many-to-many context
 
-## TypeScript
+## Backend Integration
 
-All components are fully typed with TypeScript, providing excellent IDE autocomplete and type safety.
+Curator components are designed to work seamlessly with REST APIs that implement structured pagination, sorting, and filtering. For Go backends, check out [dewey](https://github.com/tone-labs/dewey), which provides utilities for building these capabilities into your API endpoints.
 
 ## License
 
