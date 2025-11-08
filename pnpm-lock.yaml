@@ -40,7 +40,7 @@ importers:
         specifier: ^8.3.6
         version: 8.3.6(@mantine/core@8.3.6(@mantine/hooks@8.3.6(react@19.2.0))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@mantine/hooks@8.3.6(react@19.2.0))(dayjs@1.11.19)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@mantine/hooks':
-        specifier: ^8.0.0
+        specifier: ^8.3.6
         version: 8.3.6(react@19.2.0)
       '@mantine/modals':
         specifier: ^8.3.6
