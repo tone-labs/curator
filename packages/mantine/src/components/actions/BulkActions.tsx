@@ -99,11 +99,12 @@ export function BulkActions({
         pagination: {
           current: currentPage,
           pageSize: batchSize,
-        },
+          mode: 'server',
+        } as any,
         filters: filters || [],
       });
 
-      allIds.push(...response.data.map((item) => item.id));
+      allIds.push(...response.data.map((item) => item.id).filter((id): id is BaseKey => id !== undefined));
       hasMore = response.data.length === batchSize;
       currentPage++;
     }

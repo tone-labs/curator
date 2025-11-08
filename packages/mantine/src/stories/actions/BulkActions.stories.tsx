@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
 import { Stack, Text } from '@mantine/core';
+import type { BaseKey } from '@refinedev/core';
 import { type DataProvider, type GetListParams, Refine } from '@refinedev/core';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import { type BulkAction, BulkActions } from '../../components/actions/BulkActions';
 import { useTableSelection } from '../../hooks/useTableSelection';
@@ -49,7 +50,6 @@ const meta = {
 } satisfies Meta<typeof BulkActions>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
 // Interactive example with state
 function BulkActionsExample() {
@@ -152,11 +152,11 @@ function BulkActionsExample() {
   );
 }
 
-export const Interactive: Story = {
+export const Interactive = {
   render: () => <BulkActionsExample />,
 };
 
-export const WithSelection: Story = {
+export const WithSelection = {
   render: () => {
     const mockRecords = Array.from({ length: 25 }, (_, i) => ({
       id: `${i + 1}`,
@@ -175,14 +175,14 @@ export const WithSelection: Story = {
       {
         label: 'Activate',
         value: 'activate',
-        onExecute: async (ids) => {
+        onExecute: async (ids: BaseKey[]) => {
           console.log('Activate:', ids);
         },
       },
       {
         label: 'Delete',
         value: 'delete',
-        onExecute: async (ids) => {
+        onExecute: async (ids: BaseKey[]) => {
           console.log('Delete:', ids);
         },
       },
@@ -208,7 +208,7 @@ export const WithSelection: Story = {
   },
 };
 
-export const AllSelected: Story = {
+export const AllSelected = {
   render: () => {
     const mockRecords = Array.from({ length: 25 }, (_, i) => ({
       id: `${i + 1}`,
@@ -221,7 +221,7 @@ export const AllSelected: Story = {
       {
         label: 'Activate',
         value: 'activate',
-        onExecute: async (ids) => {
+        onExecute: async (ids: BaseKey[]) => {
           console.log('Activate:', ids);
         },
       },
@@ -247,7 +247,7 @@ export const AllSelected: Story = {
   },
 };
 
-export const NoSelection: Story = {
+export const NoSelection = {
   args: {
     resource: 'users',
     selectedIds: [],
@@ -255,14 +255,14 @@ export const NoSelection: Story = {
       {
         label: 'Activate',
         value: 'activate',
-        onExecute: async (ids) => {
+        onExecute: async (ids: BaseKey[]) => {
           console.log('Activate:', ids);
         },
       },
       {
         label: 'Delete',
         value: 'delete',
-        onExecute: async (ids) => {
+        onExecute: async (ids: BaseKey[]) => {
           console.log('Delete:', ids);
         },
       },
