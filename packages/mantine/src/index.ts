@@ -1,3 +1,4 @@
+export { type BulkAction, BulkActions, type BulkActionsProps } from './components/actions/BulkActions.js';
 export { CreateButton, type CreateButtonProps } from './components/buttons/CreateButton.js';
 export { DeleteButton, type DeleteButtonProps } from './components/buttons/DeleteButton.js';
 export { EditButton, type EditButtonProps } from './components/buttons/EditButton.js';
@@ -63,3 +64,4 @@ export { Create } from './components/views/Create.js';
 export { Edit } from './components/views/Edit.js';
 export { List, type ListProps } from './components/views/List.js';
 export { Show } from './components/views/Show.js';
+export { useRecordSelection } from './hooks/useRecordSelection.js';

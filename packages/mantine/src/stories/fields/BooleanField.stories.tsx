@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { IconCircleCheck, IconCircleX } from '@tabler/icons-react';
+
 import { BooleanField } from '../../components/fields/BooleanField';
 
 const meta = {

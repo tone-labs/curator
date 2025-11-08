@@ -62,7 +62,7 @@ export function NumericFilter({
 
     const numValue = typeof value === 'string' ? parseFloat(value) : value;
 
-    if (isNaN(numValue)) {
+    if (Number.isNaN(numValue)) {
       return;
     }
 

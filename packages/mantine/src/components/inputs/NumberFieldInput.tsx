@@ -56,7 +56,7 @@ export function NumberFieldInput({
 
           const numValue = typeof value === 'string' ? parseFloat(value) : value;
 
-          if (isNaN(numValue)) {
+          if (Number.isNaN(numValue)) {
             return 'Must be a valid number';
           }
 
