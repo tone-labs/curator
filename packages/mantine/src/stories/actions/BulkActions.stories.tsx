@@ -6,7 +6,14 @@ import { type DataProvider, type GetListParams, Refine } from '@refinedev/core';
 import type { Meta } from '@storybook/react';
 
 import { type BulkAction, BulkActions } from '../../components/actions/BulkActions';
-import { useTableSelection } from '../../hooks/useTableSelection';
+import { useRecordSelection } from '../../hooks/useRecordSelection';
+
+// Helper to create mock records
+const createMockRecords = (length: number) =>
+  Array.from({ length }, (_, i) => ({
+    id: `${i + 1}`,
+    name: `User ${i + 1}`,
+  }));
 
 // Mock data provider
 const mockDataProvider = {
@@ -15,10 +22,7 @@ const mockDataProvider = {
     const start = (currentPage - 1) * pageSize;
     const end = start + pageSize;
 
-    const allData = Array.from({ length: 100 }, (_, i) => ({
-      id: `${i + 1}`,
-      name: `Item ${i + 1}`,
-    }));
+    const allData = createMockRecords(100);
 
     return {
       data: allData.slice(start, end),
@@ -54,15 +58,10 @@ export default meta;
 // Interactive example with state
 function BulkActionsExample() {
   const [actionLog, setActionLog] = useState<string[]>([]);
-
-  // Mock current page data
-  const mockRecords = Array.from({ length: 25 }, (_, i) => ({
-    id: `${i + 1}`,
-    name: `User ${i + 1}`,
-  }));
+  const mockRecords = createMockRecords(5);
 
   const { selectedIds, selectedRecords, onSelectedRecordsChange, clearSelection, allSelected, selectAll } =
-    useTableSelection(mockRecords);
+    useRecordSelection(mockRecords);
 
   const bulkActions: BulkAction[] = [
     {
@@ -121,7 +120,7 @@ function BulkActionsExample() {
         <Text size="sm" fw={500}>
           Simulate selection (click to toggle):
         </Text>
-        {mockRecords.slice(0, 10).map((record) => (
+        {mockRecords.map((record) => (
           <label key={record.id} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8 }}>
             <input
               type="checkbox"
@@ -131,9 +130,6 @@ function BulkActionsExample() {
             <Text size="sm">{record.name}</Text>
           </label>
         ))}
-        <Text size="xs" c="dimmed">
-          ... and 15 more items on this page
-        </Text>
       </Stack>
 
       {actionLog.length > 0 && (
@@ -158,12 +154,9 @@ export const Interactive = {
 
 export const WithSelection = {
   render: () => {
-    const mockRecords = Array.from({ length: 25 }, (_, i) => ({
-      id: `${i + 1}`,
-      name: `User ${i + 1}`,
-    }));
+    const mockRecords = createMockRecords(25);
 
-    const { selectedIds, clearSelection, allSelected, selectAll } = useTableSelection(mockRecords);
+    const { selectedIds, clearSelection, allSelected, selectAll } = useRecordSelection(mockRecords);
 
     // Pre-select first 5 items
     const [initialized, setInitialized] = useState(false);
@@ -210,12 +203,9 @@ export const WithSelection = {
 
 export const AllSelected = {
   render: () => {
-    const mockRecords = Array.from({ length: 25 }, (_, i) => ({
-      id: `${i + 1}`,
-      name: `User ${i + 1}`,
-    }));
+    const mockRecords = createMockRecords(25);
 
-    const { selectedIds, clearSelection, selectAll } = useTableSelection(mockRecords);
+    const { selectedIds, clearSelection, selectAll } = useRecordSelection(mockRecords);
 
     const bulkActions: BulkAction[] = [
       {

@@ -64,4 +64,4 @@ export { Create } from './components/views/Create.js';
 export { Edit } from './components/views/Edit.js';
 export { List, type ListProps } from './components/views/List.js';
 export { Show } from './components/views/Show.js';
-export { useTableSelection } from './hooks/useTableSelection.js';
+export { useRecordSelection } from './hooks/useRecordSelection.js';

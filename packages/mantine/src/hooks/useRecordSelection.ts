@@ -3,25 +3,26 @@ import { useCallback, useMemo, useState } from 'react';
 import type { BaseKey, BaseRecord } from '@refinedev/core';
 
 /**
- * Hook to manage table row selection state
+ * Hook to manage record selection state
  *
  * Provides state management for:
- * - Row selection (which rows are selected)
+ * - Record selection (which records are selected)
  * - "Select all" functionality (selecting all records across pages)
- * - Integration with Mantine DataTable's selection API
+ * - Integration with selection UIs (tables, lists, grids, etc.)
  *
  * @example
  * ```tsx
  * const { selectedIds, selectedRecords, onSelectedRecordsChange, clearSelection, allSelected, selectAll } =
- *   useTableSelection<User>(users);
+ *   useRecordSelection<User>(users);
  *
+ * // Use with Mantine DataTable
  * <DataTable
  *   selectedRecords={selectedRecords}
  *   onSelectedRecordsChange={onSelectedRecordsChange}
  *   records={users}
- *   // ... other props
  * />
  *
+ * // Use with BulkActions
  * <BulkActions
  *   selectedIds={selectedIds}
  *   allSelected={allSelected}
@@ -30,11 +31,11 @@ import type { BaseKey, BaseRecord } from '@refinedev/core';
  * />
  * ```
  */
-export function useTableSelection<T extends BaseRecord>(records: T[]) {
-  const [rowSelection, setRowSelection] = useState<Record<BaseKey, boolean>>({});
+export function useRecordSelection<T extends BaseRecord>(records: T[]) {
+  const [recordSelection, setRecordSelection] = useState<Record<BaseKey, boolean>>({});
   const [allSelected, setAllSelected] = useState(false);
 
-  const selectedIds = useMemo(() => Object.keys(rowSelection), [rowSelection]);
+  const selectedIds = useMemo(() => Object.keys(recordSelection), [recordSelection]);
 
   const selectedRecords = useMemo(() => {
     const idSet: Set<BaseKey> = new Set(selectedIds);
@@ -48,11 +49,11 @@ export function useTableSelection<T extends BaseRecord>(records: T[]) {
         newSelection[record.id] = true;
       }
     });
-    setRowSelection(newSelection);
+    setRecordSelection(newSelection);
   }, []);
 
   const clearSelection = useCallback(() => {
-    setRowSelection({});
+    setRecordSelection({});
     setAllSelected(false);
   }, []);
 
@@ -61,8 +62,8 @@ export function useTableSelection<T extends BaseRecord>(records: T[]) {
   }, []);
 
   return {
-    rowSelection,
-    setRowSelection,
+    recordSelection,
+    setRecordSelection,
     selectedIds,
     selectedRecords,
     onSelectedRecordsChange,

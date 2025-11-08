@@ -103,7 +103,7 @@ Query filter components for list pages:
 ### Actions
 Perform operations on multiple selected records:
 - `BulkActions` - UI component for bulk operations with dropdown and "select all" functionality
-- `useTableSelection` - Hook to manage table row selection state
+- `useRecordSelection` - Hook to manage record selection state
 
 ### Forms
 Pre-built form layouts:
