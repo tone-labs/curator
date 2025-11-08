@@ -87,25 +87,26 @@ export async function fetchAllIds(
 export function recordsToCSV(records: BaseRecord[], fields?: string[], fieldLabels?: Record<string, string>): string {
   if (records.length === 0) return '';
 
-  // If fields are specified, filter records to only include those fields
+  // If fields are specified, filter records and apply custom labels
   const recordsToExport = fields
     ? records.map((record) => {
         const filtered: BaseRecord = {};
         fields.forEach((field) => {
-          filtered[field] = record[field];
+          // Use custom label as key if provided, otherwise use original field name
+          const key = fieldLabels?.[field] || field;
+          filtered[key] = record[field];
         });
         return filtered;
       })
     : records;
 
-  // Configure CSV export
+  // Configure CSV export - always use keys as headers since we've applied labels above
   const csvConfig = mkConfig({
     fieldSeparator: ',',
     quoteStrings: true,
     decimalSeparator: '.',
     showColumnHeaders: true,
-    useKeysAsHeaders: !fields,
-    columnHeaders: fields?.map((field) => fieldLabels?.[field] || field),
+    useKeysAsHeaders: true,
   });
 
   // Generate and return CSV

@@ -1,6 +1,6 @@
 {
   "name": "@curatordev/mantine",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "React admin UI components for Mantine v8 + Refine.js",
   "type": "module",
   "main": "dist/index.js",
@@ -19,6 +19,9 @@
     "clean": "rm -rf dist",
     "build": "tsup",
     "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
     "typecheck": "tsc --noEmit --project tsconfig.dev.json",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -67,14 +70,17 @@
     "@storybook/react-vite": "^10.0.6",
     "@tabler/icons-react": "^3.31.0",
     "@types/react": "^19.0.6",
+    "@vitest/ui": "^4.0.8",
     "@vueless/storybook-dark-mode": "^10.0.2",
     "dayjs": "^1.11.18",
+    "happy-dom": "^20.0.10",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
     "react": "^19.2.0",
     "react-hook-form": "^7.54.1",
     "storybook": "^10.0.6",
     "tsup": "^8.5.0",
-    "typescript": "~5.9.3"
+    "typescript": "~5.9.3",
+    "vitest": "^4.0.8"
   }
 }
