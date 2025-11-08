@@ -19,7 +19,7 @@
     "clean": "rm -rf dist",
     "build": "tsup",
     "dev": "tsup --watch",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit --project tsconfig.dev.json",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

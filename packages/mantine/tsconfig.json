@@ -1,4 +1,4 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "include": ["src", ".storybook/**/*.tsx", "tsup.config.ts"]
+  "files": [],
+  "references": [{ "path": "./tsconfig.dev.json" }, { "path": "./tsconfig.build.json" }]
 }
